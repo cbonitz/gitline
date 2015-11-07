@@ -29,8 +29,9 @@
 	public addRelations() {
 
 		// Direct parent
-		if(this.commit.directparent != null) {
+		if(this.commit.directparent != null && this.commit.directparent.outOfScope === false) {
 			var dpl : Shape;
+            console.log(this.commit.directparent);
 			if(this.commit.getLane() == this.commit.directparent.getLane() || this.commit.directparent.outOfScope) {  
 				// direct parent is the same X/lane, this means it is a standard forward commit 
 				dpl = new Straight(this.canvas).from(this.commit.directparent.view.dot).to(this.dot).color(this.commit.getColor(20));
@@ -42,7 +43,8 @@
 			this.lines.push(dpl);
 		}
 		
-		var allmerges = this.commit.merges.standard.concat(this.commit.merges.anonymous);
+        var allmerges = this.commit.merges.standard.concat(this.commit.merges.anonymous).filter(x => x.outOfScope === false);
+        console.log(allmerges);
 		allmerges.forEach(merge => {
 			this.lines.push(
 				new Curve(this.canvas)

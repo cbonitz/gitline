@@ -79,7 +79,9 @@ class Gitline {
 		
 		al.then("Drawing Merges", () => {return Object.keys(this.commits)}, (sha) => {
 			var commit = this.commits[sha];
-			this.drawReferences(commit);
+            if (commit.outOfScope === false) {
+                this.drawReferences(commit);
+            }
 		});
 		
 		al.thenSingle("Resizing", () => {
