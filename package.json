@@ -10,8 +10,8 @@
     "network"
   ],
   "scripts": {
-    "pretest": "tsc",
-    "test": "node src/test/index.js",
+    "pretest": "tsd install; tsc --project src/test",
+    "test": "mocha",
     "prestart": "tsc",
     "start": "serve .",
     "watch": "tsc --watch"
@@ -19,8 +19,11 @@
   "preferGlobal": true,
   "private": true,
   "devDependencies": {
+    "chai": "^3.4.0",
     "git2json": "https://github.com/blecher-at/git2json.git",
+    "mocha": "^2.3.3",
     "serve": "^1.4.0",
+    "tsd": "^0.6.5",
     "typescript": "^1.6.2"
   }
 }
